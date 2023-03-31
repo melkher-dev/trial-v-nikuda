@@ -48,7 +48,6 @@
 import { RouterLink, useRouter } from "vue-router";
 import axios from "axios";
 import { ref } from "vue";
-import Cookies from "js-cookie";
 import { useAuthStore } from '@/stores/auth.js'
 
 const router = useRouter();
