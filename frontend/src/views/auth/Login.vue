@@ -31,11 +31,16 @@
                         >Register</router-link
                     >
                 </div>
-                <div class="form-control">
+                <div v-if="!isDisabled" class="form-control">
                     <button
-                        @click="login"
+                        @click="handleLogin"
                         class="btn btn-outline btn-primary btn-sm"
                     >
+                        Login
+                    </button>
+                </div>
+                <div v-else class="form-control">
+                    <button class="btn btn-outline btn-primary btn-sm" disabled>
                         Login
                     </button>
                 </div>
@@ -46,11 +51,12 @@
 
 <script setup>
 import { RouterLink, useRouter } from "vue-router";
-import axios from "axios";
 import { ref } from "vue";
-import { useAuthStore } from '@/stores/auth.js'
+import { useAuthStore } from "@/stores/auth.js";
 
 const router = useRouter();
+
+let isDisabled = ref(false);
 
 const form = ref({
     email: "",
@@ -58,13 +64,9 @@ const form = ref({
     remember: false,
 });
 
-const login = async () => {
-    const { data } = await axios.post("/api/login", form.value);
-
-    await useAuthStore().setToken(data.access_token, form.remember);
-
-    await useAuthStore().fetchUser();
-
+const handleLogin = async () => {
+    isDisabled.value = true;
+    await useAuthStore().login(form.value);
     router.push("/");
 };
 </script>

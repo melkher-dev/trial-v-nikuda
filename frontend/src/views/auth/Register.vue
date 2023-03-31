@@ -28,7 +28,7 @@
                 />
                 <div class="form-control" v-if="!isDisabled">
                     <button
-                        @click="register()"
+                        @click="handleRegister"
                         class="btn btn-outline btn-primary btn-sm"
                     >
                         Register
@@ -61,14 +61,10 @@ const form = ref({
     password_confirmation: "",
 });
 
-const register = async () => {
+const handleRegister = async () => {
     isDisabled.value = true;
     try {
-        const response = await axios.post("/api/register", form.value);
-        console.log(response);
-        const { data } = await axios.post("/api/login", form.value);
-        await useAuthStore().setToken(data.access_token, form.remember);
-        await useAuthStore().fetchUser();
+        await useAuthStore().register(form.value);
         router.push("/");
     } catch (error) {
         console.log(error);

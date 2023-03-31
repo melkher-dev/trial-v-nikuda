@@ -19,6 +19,17 @@ export const useAuthStore = defineStore('auth', {
             } catch (e) {
                 console.log('e', e)
             }
+        },
+        async login(form) {
+            const { data } = await axios.post("/api/login", form);
+            await this.setToken(data.access_token, form.remember);
+            await this.fetchUser();
+        },
+        async register(form) {
+            const response = await axios.post("/api/register", form);
+            const { data } = await axios.post("/api/login", form);
+            await this.setToken(data.access_token, form.remember);
+            await this.fetchUser();
         }
     }
 })
