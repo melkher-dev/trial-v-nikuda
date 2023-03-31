@@ -16,5 +16,11 @@ import { RouterLink, RouterView } from 'vue-router'
     </div>
   </header>
 
+  <div class="flex justify-center">
+    <h1 class="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  </div>
+
   <RouterView />
 </template>
