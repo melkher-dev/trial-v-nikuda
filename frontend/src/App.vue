@@ -18,7 +18,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
   <div class="flex justify-center">
     <h1 class="text-3xl font-bold underline">
-      Hello world!
+      Hello KeK!
     </h1>
   </div>
 

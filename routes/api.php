@@ -21,13 +21,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'middleware' => 'api',
-        'prefix' => 'auth'
+        'middleware' => 'auth:api'
     ],
     function ($router) {
-        Route::post('login', [LoginController::class, 'login']);
         Route::post('logout', [LoginController::class, 'logout']);
         Route::post('refresh', [LoginController::class, 'refresh']);
-        Route::post('me', [LoginController::class, 'me']);
+        Route::get('user', [LoginController::class, 'current']);
     }
 );
+
+Route::group(['middleware' => 'guest:api'], function () {
+    Route::post('login', [LoginController::class, 'login']);
+    // Route::post('register', [RegisterController::class, 'register']);
+});

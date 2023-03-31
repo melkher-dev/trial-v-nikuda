@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login']]);
-    }
-
     public function login()
     {
         $credentials = request(['email', 'password']);
@@ -23,7 +18,7 @@ class LoginController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function me()
+    public function current()
     {
         return response()->json(auth()->user());
     }

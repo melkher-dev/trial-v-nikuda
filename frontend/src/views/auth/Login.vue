@@ -49,6 +49,7 @@ import { RouterLink, useRouter } from "vue-router";
 import axios from "axios";
 import { ref } from "vue";
 import Cookies from "js-cookie";
+import { useAuthStore } from '@/stores/auth.js'
 
 const router = useRouter();
 
@@ -59,9 +60,12 @@ const form = ref({
 });
 
 const login = async () => {
-    const { data } = await axios.post("/api/auth/login", form.value);
-    // console.log(response);
-    Cookies.set("token", data.access_token, { expires: form.remember ? 365 : data.expires_in });
+    const { data } = await axios.post("/api/login", form.value);
+
+    await useAuthStore().setToken(data.access_token, form.remember);
+
+    await useAuthStore().fetchUser();
+
     router.push("/");
 };
 </script>
