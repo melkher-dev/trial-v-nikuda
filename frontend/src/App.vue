@@ -10,13 +10,15 @@
         </div> -->
     </header>
     <!-- <div v-if="user"> -->
-    <AuthenticatedLayout v-if="useAuthStore().user">
-        <RouterView />
-    </AuthenticatedLayout>
+    <div>
+        <GuestLayout v-if="isGuestRoute(route)">
+            <RouterView />
+        </GuestLayout>
+        <AuthenticatedLayout v-else>
+            <RouterView />
+        </AuthenticatedLayout>
+    </div>
 
-    <GuestLayout v-else>
-        <RouterView />
-    </GuestLayout>
     <!-- </div> -->
     <!-- <div v-else> -->
     <!-- <GuestLayout /> -->
@@ -25,12 +27,18 @@
 
 <script setup>
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout.vue";
-import { RouterLink, RouterView } from "vue-router";
+import { useRoute, RouterView } from "vue-router";
 import { ref, onMounted } from "vue";
 import { useAuthStore } from "@/stores/auth.js";
 import GuestLayout from "./layouts/GuestLayout.vue";
 
-// onMounted(() => {
-//     useAuthStore().fetchUser();
-// });
+const route = useRoute();
+
+const isGuestRoute = (route) => {
+    return route.path === "/login" || route.path === "/register";
+};
+
+onMounted(async () => {
+    await useAuthStore().fetchUser();
+});
 </script>
