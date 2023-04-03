@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
@@ -18,9 +19,11 @@ class LoginController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function current()
+    public function user()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+        // dd($user);
+        return $user;
     }
 
     public function logout()

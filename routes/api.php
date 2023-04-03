@@ -27,7 +27,7 @@ Route::group(
     function ($router) {
         Route::post('logout', [LoginController::class, 'logout']);
         Route::post('refresh', [LoginController::class, 'refresh']);
-        Route::get('user', [LoginController::class, 'current']);
+        Route::get('user', [LoginController::class, 'user']);
     }
 );
 
