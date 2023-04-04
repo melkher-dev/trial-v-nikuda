@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-gray-800 px-4 py-3 flex justify-between items-center">
+    <header class="bg-cyan-800 px-4 py-3 flex justify-between items-center">
         <div class="text-gray-300 font-semibold text-lg">My App</div>
         <nav>
             <ul class="flex space-x-4">
@@ -19,13 +19,27 @@
                     >
                 </li>
                 <li>
-                    <a href="#" class="text-gray-300 hover:text-gray-100"
-                        >Logout</a
+                    <button
+                        @click="handleLogout"
+                        class="text-gray-300 hover:text-gray-100"
                     >
+                        Logout
+                    </button>
                 </li>
             </ul>
         </nav>
     </header>
 </template>
 
-<script setup></script>
+<script setup>
+import { useAuthStore } from "../stores/auth";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const authStore = useAuthStore();
+
+const handleLogout = () => {
+    authStore.logout();
+    router.push("/login");
+};
+</script>

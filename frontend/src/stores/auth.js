@@ -27,11 +27,18 @@ export const useAuthStore = defineStore('auth', {
         async login(form) {
             const { data } = await axios.post("/api/login", form);
             await this.setToken(data.access_token, form.remember);
+            await this.fetchUser();
         },
 
         async register(form) {
             await axios.post("/api/register", form);
             await this.login(form);
+        },
+
+        async logout() {
+            this.user = null
+            this.token = null
+            Cookies.remove('token')
         }
     }
 })

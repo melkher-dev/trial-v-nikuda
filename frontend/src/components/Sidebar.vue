@@ -1,5 +1,5 @@
 <template>
-    <aside class="bg-gray-800 w-64 px-4 py-6 text-gray-300">
+    <aside class="bg-cyan-800 w-64 px-4 py-6 text-gray-300">
         <h2 class="text-lg font-semibold mb-4">Sidebar</h2>
         <ul>
             <li class="mb-2">

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="flex justify-center">
         <h1>Home page</h1>
     </div>
 </template>

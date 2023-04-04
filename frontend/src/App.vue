@@ -35,7 +35,7 @@ import GuestLayout from "./layouts/GuestLayout.vue";
 const route = useRoute();
 
 const isGuestRoute = (route) => {
-    return route.path === "/login" || route.path === "/register";
+    return route.path === "/login" || route.path === "/register" || route.path === "/";
 };
 
 onMounted(async () => {
