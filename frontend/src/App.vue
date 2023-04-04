@@ -14,6 +14,9 @@
         <GuestLayout v-if="isGuestRoute(route)">
             <RouterView />
         </GuestLayout>
+        <AdminLayout v-if="isAdminRoute(route)">
+            <RouterView />
+        </AdminLayout>
         <AuthenticatedLayout v-else>
             <RouterView />
         </AuthenticatedLayout>
@@ -27,15 +30,20 @@
 
 <script setup>
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout.vue";
+import AdminLayout from "./layouts/AdminLayout.vue";
+import GuestLayout from "./layouts/GuestLayout.vue";
 import { useRoute, RouterView } from "vue-router";
 import { ref, onMounted } from "vue";
 import { useAuthStore } from "@/stores/auth.js";
-import GuestLayout from "./layouts/GuestLayout.vue";
 
 const route = useRoute();
 
 const isGuestRoute = (route) => {
     return route.path === "/login" || route.path === "/register" || route.path === "/";
+};
+
+const isAdminRoute = (route) => {
+    return route.path === "/admin";
 };
 
 onMounted(async () => {

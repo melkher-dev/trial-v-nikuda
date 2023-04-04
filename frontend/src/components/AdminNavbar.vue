@@ -1,21 +1,21 @@
 <template>
     <header class="bg-blue-600 px-4 py-3 flex justify-between items-center">
-        <div class="text-gray-300 font-semibold text-lg">Authenticated Navbar</div>
+        <div class="text-gray-300 font-semibold text-lg">Admin Navbar</div>
         <nav>
             <ul class="flex space-x-4">
                 <li>
                     <a href="#" class="text-gray-300 hover:text-gray-100"
-                        >Dashboard</a
+                        >admin</a
                     >
                 </li>
                 <li>
                     <a href="#" class="text-gray-300 hover:text-gray-100"
-                        >Profile</a
+                        >admin</a
                     >
                 </li>
                 <li>
                     <a href="#" class="text-gray-300 hover:text-gray-100"
-                        >Settings</a
+                        >admin</a
                     >
                 </li>
                 <li>

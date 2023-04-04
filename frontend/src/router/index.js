@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
+import Admin from '../views/Admin.vue'
 import { useAuthStore } from '../stores/auth'
 
 const router = createRouter({
@@ -27,6 +28,14 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: Admin,
       meta: {
         requiresAuth: true
       }
