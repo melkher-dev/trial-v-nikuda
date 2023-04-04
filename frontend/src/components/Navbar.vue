@@ -13,7 +13,7 @@
                         >Profile</a
                     >
                 </li>
-                <li v-if="authStore.admin">
+                <li v-if="authStore.isAdmin">
                     <router-link to="/admin" class="text-gray-300 hover:text-gray-100"
                         >Admin Page</router-link
                     >
