@@ -3,9 +3,15 @@
         <div class="card w-96 bg-base-100 shadow-xl">
             <div class="card-body">
                 <input
-                    v-model="form.name"
+                    v-model="form.first_name"
                     type="text"
-                    placeholder="Name"
+                    placeholder="First Name"
+                    class="input input-bordered input-primary w-full max-w-xs"
+                />
+                <input
+                    v-model="form.last_name"
+                    type="text"
+                    placeholder="Last Name"
                     class="input input-bordered input-primary w-full max-w-xs"
                 />
                 <input
@@ -55,7 +61,8 @@ const router = useRouter();
 let isDisabled = ref(false);
 
 const form = ref({
-    name: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
     password_confirmation: "",
