@@ -17,7 +17,7 @@
         <AdminLayout v-if="isAdminRoute(route)">
             <RouterView />
         </AdminLayout>
-        <AuthenticatedLayout v-else>
+        <AuthenticatedLayout v-if="isUserRoute(route)">
             <RouterView />
         </AuthenticatedLayout>
     </div>
@@ -44,6 +44,10 @@ const isGuestRoute = (route) => {
 
 const isAdminRoute = (route) => {
     return route.path === "/admin";
+};
+
+const isUserRoute = (route) => {
+    return route.path === "/dashboard";
 };
 
 onMounted(async () => {

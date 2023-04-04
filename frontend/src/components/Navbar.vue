@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-blue-600 px-4 py-3 flex justify-between items-center">
+    <header class="bg-cyan-600 px-4 py-3 flex justify-between items-center">
         <div class="text-gray-300 font-semibold text-lg">Authenticated Navbar</div>
         <nav>
             <ul class="flex space-x-4">
