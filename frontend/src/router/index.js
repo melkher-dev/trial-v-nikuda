@@ -37,17 +37,29 @@ const router = createRouter({
       name: 'admin',
       component: Admin,
       meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresAdmin: true
       }
     },
   ]
 })
+
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   if (requiresAuth && !authStore.token) {
     next('/login')
+  } else {
+    next()
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
+  if (requiresAdmin && !authStore.isAdmin) {
+    next('/dashboard')
   } else {
     next()
   }

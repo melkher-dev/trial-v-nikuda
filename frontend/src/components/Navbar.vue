@@ -13,9 +13,9 @@
                         >Profile</a
                     >
                 </li>
-                <li>
-                    <a href="#" class="text-gray-300 hover:text-gray-100"
-                        >Settings</a
+                <li v-if="authStore.admin">
+                    <router-link to="/admin" class="text-gray-300 hover:text-gray-100"
+                        >Admin Page</router-link
                     >
                 </li>
                 <li>
@@ -33,7 +33,7 @@
 
 <script setup>
 import { useAuthStore } from "../stores/auth";
-import { useRouter } from "vue-router";
+import { useRouter, RouterLink } from "vue-router";
 
 const router = useRouter();
 const authStore = useAuthStore();

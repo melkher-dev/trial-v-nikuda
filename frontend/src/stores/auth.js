@@ -5,8 +5,13 @@ import Cookies from 'js-cookie'
 export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null,
-        token: Cookies.get('token')
+        token: Cookies.get('token'),
+        admin: false
     }),
+
+    getters: {
+        isAdmin: (state) => state.user && state.user.is_admin
+    },
 
     actions: {
         async setToken(token, remember) {
@@ -18,6 +23,7 @@ export const useAuthStore = defineStore('auth', {
             try {
                 const { data } = await axios.get('/api/user')
                 this.user = data;
+                // this.admin = data.is_admin;
                 console.log('this.user', this.user)
             } catch (e) {
                 console.log('e', e)

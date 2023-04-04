@@ -14,8 +14,10 @@
                     >
                 </li>
                 <li>
-                    <a href="#" class="text-gray-300 hover:text-gray-100"
-                        >admin</a
+                    <router-link
+                        to="/dashboard"
+                        class="text-gray-300 hover:text-gray-100"
+                        >Dashboard</router-link
                     >
                 </li>
                 <li>
@@ -33,7 +35,7 @@
 
 <script setup>
 import { useAuthStore } from "../stores/auth";
-import { useRouter } from "vue-router";
+import { useRouter, RouterLink } from "vue-router";
 
 const router = useRouter();
 const authStore = useAuthStore();
