@@ -19,7 +19,7 @@ class LoginController extends Controller
         return $this->respondWithToken($token);
     }
 
-    public function user()
+    public function auth()
     {
         $user = auth()->user();
         // dd($user);

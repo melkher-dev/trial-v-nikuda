@@ -3,7 +3,9 @@
         <h2 class="text-lg font-semibold mb-4">Sidebar</h2>
         <ul>
             <li class="mb-2">
-                <a href="#" class="hover:text-gray-100">Users</a>
+                <router-link to="/users" class="hover:text-gray-100"
+                    >Users</router-link
+                >
             </li>
             <li class="mb-2">
                 <a href="#" class="hover:text-gray-100">admin</a>
@@ -18,4 +20,6 @@
     </aside>
 </template>
 
-<script setup></script>
+<script setup>
+import { RouterLink } from "vue-router";
+</script>

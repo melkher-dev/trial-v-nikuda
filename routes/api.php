@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -21,17 +22,20 @@ use App\Http\Controllers\Auth\RegisterController;
 // });
 
 Route::group(
-    [
-        'middleware' => 'auth:api'
-    ],
-    function ($router) {
-        Route::post('logout', [LoginController::class, 'logout']);
-        Route::post('refresh', [LoginController::class, 'refresh']);
-        Route::get('user', [LoginController::class, 'user']);
+    ['middleware' => 'guest:api'],
+    function () {
+        Route::post('login', [LoginController::class, 'login']);
+        Route::post('register', [RegisterController::class, 'register']);
     }
 );
 
-Route::group(['middleware' => 'guest:api'], function () {
-    Route::post('login', [LoginController::class, 'login']);
-    Route::post('register', [RegisterController::class, 'register']);
-});
+Route::group(
+    ['middleware' => 'auth:api'],
+    function () {
+        Route::post('logout', [LoginController::class, 'logout']);
+        Route::post('refresh', [LoginController::class, 'refresh']);
+        Route::get('auth', [LoginController::class, 'auth']);
+
+        Route::get('users', [UserController::class, 'index']);
+    }
+);

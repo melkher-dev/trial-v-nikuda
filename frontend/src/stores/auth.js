@@ -20,10 +20,8 @@ export const useAuthStore = defineStore('auth', {
 
         async fetchUser() {
             try {
-                const { data } = await axios.get('/api/user')
+                const { data } = await axios.get('/api/auth')
                 this.user = data;
-                // this.admin = data.is_admin;
-                console.log('this.user', this.user)
             } catch (e) {
                 console.log('e', e)
             }

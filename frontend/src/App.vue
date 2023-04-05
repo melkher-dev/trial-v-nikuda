@@ -43,7 +43,7 @@ const isGuestRoute = (route) => {
 };
 
 const isAdminRoute = (route) => {
-    return route.path === "/admin";
+    return route.path === "/admin" || route.path === "/users";
 };
 
 const isUserRoute = (route) => {
