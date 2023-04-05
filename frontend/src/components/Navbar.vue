@@ -1,27 +1,31 @@
 <template>
-    <header class="bg-cyan-600 px-4 py-3 flex justify-between items-center">
-        <div class="text-gray-300 font-semibold text-lg">Authenticated Navbar</div>
+    <header class="bg-green-400 px-4 py-3 flex justify-between items-center">
+        <div class="text-black-300 font-semibold text-lg">
+            Authenticated Navbar
+        </div>
         <nav>
             <ul class="flex space-x-4">
                 <li>
-                    <a href="#" class="text-gray-300 hover:text-gray-100"
+                    <a href="#" class="text-black-300 hover:text-gray-100"
                         >Dashboard</a
                     >
                 </li>
                 <li>
-                    <a href="#" class="text-gray-300 hover:text-gray-100"
+                    <a href="#" class="text-black-300 hover:text-gray-100"
                         >Profile</a
                     >
                 </li>
                 <li v-if="authStore.isAdmin">
-                    <router-link to="/admin" class="text-gray-300 hover:text-gray-100"
+                    <router-link
+                        to="/admin"
+                        class="text-black-300 hover:text-gray-100"
                         >Admin Page</router-link
                     >
                 </li>
                 <li>
                     <button
                         @click="handleLogout"
-                        class="text-gray-300 hover:text-gray-100"
+                        class="text-black-300 hover:text-gray-100"
                     >
                         Logout
                     </button>
