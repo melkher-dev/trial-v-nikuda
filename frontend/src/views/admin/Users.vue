@@ -66,30 +66,30 @@ const users = ref([]);
 const currentPage = ref(1);
 const totalPages = ref(0);
 
-async function fetchUsers(page) {
+const fetchUsers = async (page) => {
     isLoading.value = true;
     const { data } = await axios.get(`/api/users?page=${page}`);
     users.value = data.data;
     currentPage.value = data.current_page;
     totalPages.value = data.last_page;
     isLoading.value = false;
-}
+};
 
 onMounted(async () => {
     await fetchUsers(currentPage.value);
 });
 
-async function prev() {
+const prev = async () => {
     if (currentPage.value > 1) {
         await fetchUsers(currentPage.value - 1);
     }
-}
+};
 
-async function next() {
+const next = async () => {
     if (currentPage.value < totalPages.value) {
         await fetchUsers(currentPage.value + 1);
     }
-}
+};
 
 const deleteUser = async (id) => {
     await axios.delete(`/api/users/${id}`);
