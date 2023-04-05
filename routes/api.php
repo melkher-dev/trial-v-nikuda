@@ -37,5 +37,6 @@ Route::group(
         Route::get('auth', [LoginController::class, 'auth']);
 
         Route::get('users', [UserController::class, 'index']);
+        Route::delete('users/{id}', [UserController::class, 'destroy']);
     }
 );

@@ -25,7 +25,14 @@
                         <td>{{ user.address }}</td>
                         <td>{{ user.phone_number }}</td>
                         <td></td>
-                        <td></td>
+                        <td>
+                            <button
+                                @click="deleteUser(user.id)"
+                                class="btn btn-outline btn-error btn-sm"
+                            >
+                                Delete
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -61,9 +68,7 @@ const totalPages = ref(0);
 
 async function fetchUsers(page) {
     isLoading.value = true;
-    const { data } = await axios.get(
-        `/api/users?page=${page}`
-    );
+    const { data } = await axios.get(`/api/users?page=${page}`);
     users.value = data.data;
     currentPage.value = data.current_page;
     totalPages.value = data.last_page;
@@ -85,4 +90,9 @@ async function next() {
         await fetchUsers(currentPage.value + 1);
     }
 }
+
+const deleteUser = async (id) => {
+    await axios.delete(`/api/users/${id}`);
+    await fetchUsers(currentPage.value);
+};
 </script>
