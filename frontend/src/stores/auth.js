@@ -15,7 +15,7 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async setToken(token, remember) {
             this.token = token
-            Cookies.set('token', token, { expires: remember ? 30 : null })
+            Cookies.set('token', token, { expires: remember ? 365 : null })
         },
 
         async fetchUser() {

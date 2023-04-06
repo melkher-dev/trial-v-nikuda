@@ -64,14 +64,13 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = User::find($id);
-
         $validations = $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users,email,' . $user->id,
+            'email' => 'required|string|email|unique:users,email,' . $id,
         ]);
 
+        $user = User::find($id);
         $user->update($validations);
 
         return response($user, 200);
