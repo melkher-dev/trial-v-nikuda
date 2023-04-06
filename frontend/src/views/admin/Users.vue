@@ -18,12 +18,12 @@
                 </thead>
                 <tbody>
                     <tr v-for="(user, index) in users" :key="index">
-                        <td>{{ user.avatar }}</td>
-                        <td>{{ user.first_name }}</td>
-                        <td>{{ user.last_name }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.address }}</td>
-                        <td>{{ user.phone_number }}</td>
+                        <td>{{ user?.avatar }}</td>
+                        <td>{{ user?.first_name }}</td>
+                        <td>{{ user?.last_name }}</td>
+                        <td>{{ user?.email }}</td>
+                        <td>{{ user?.address }}</td>
+                        <td>{{ user?.phone_number }}</td>
                         <td></td>
                         <td>
                             <button
@@ -62,7 +62,7 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 
 const isLoading = ref(true);
-const users = ref([]);
+const users = ref(null);
 const currentPage = ref(1);
 const totalPages = ref(0);
 

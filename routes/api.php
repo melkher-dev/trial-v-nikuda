@@ -36,7 +36,7 @@ Route::group(
         Route::post('refresh', [LoginController::class, 'refresh']);
         Route::get('auth', [LoginController::class, 'auth']);
 
-        Route::get('users', [UserController::class, 'index']);
-        Route::delete('users/{id}', [UserController::class, 'destroy']);
+        // Route::get('users', [UserController::class], 'index');
+        Route::apiResource('users', UserController::class);
     }
 );

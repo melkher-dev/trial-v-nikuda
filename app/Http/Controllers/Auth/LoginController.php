@@ -22,7 +22,7 @@ class LoginController extends Controller
     public function auth()
     {
         $user = auth()->user();
-        // dd($user);
+
         return $user;
     }
 
