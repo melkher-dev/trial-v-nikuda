@@ -4,6 +4,14 @@
             <progress class="progress w-56"></progress>
         </div>
         <div v-else class="overflow-x-auto w-full m-2">
+            <div class="flex justify-center my-2">
+                <router-link
+                    to="/user/create"
+                    class="btn btn-outline btn-primary btn-sm"
+                >
+                    Create User
+                </router-link>
+            </div>
             <table class="table table-compact w-full">
                 <thead>
                     <tr>
@@ -24,7 +32,6 @@
                         <td>{{ user?.email }}</td>
                         <td>{{ user?.address }}</td>
                         <td>{{ user?.phone_number }}</td>
-                        <td></td>
                         <td>
                             <button
                                 @click="deleteUser(user.id)"
@@ -60,6 +67,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
+import { RouterLink } from "vue-router";
 
 const isLoading = ref(true);
 const users = ref(null);

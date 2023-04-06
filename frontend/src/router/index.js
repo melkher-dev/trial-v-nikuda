@@ -5,7 +5,8 @@ import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Admin from '../views/admin/Admin.vue'
-import Users from '../views/admin/Users.vue'
+import Users from '../views/admin/users/Users.vue'
+import UserCreate from '../views/admin/users/UserCreate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,7 +40,7 @@ const router = createRouter({
       component: Admin,
       meta: {
         requiresAuth: true,
-        requiresAdmin: true
+        // requiresAdmin: true
       }
     },
     {
@@ -48,7 +49,16 @@ const router = createRouter({
       component: Users,
       meta: {
         requiresAuth: true,
-        requiresAdmin: true
+        // requiresAdmin: true
+      }
+    },
+    {
+      path: '/user/create',
+      name: 'user-create',
+      component: UserCreate,
+      meta: {
+        requiresAuth: true,
+        // requiresAdmin: true
       }
     },
   ]
