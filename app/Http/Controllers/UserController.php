@@ -13,6 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
+
         return $users;
     }
 
@@ -21,7 +22,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validations = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'is_admin' => 'nullable|boolean',
+            'email' => 'required|string|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+            'avatar' => 'nullable|string|max:255',
+            'address' => 'nullable|string|max:255',
+            'phone_number' => 'nullable|string|max:255',
+            'is_marketing' => 'nullable|boolean',
+        ]);
+
+        $user = User::create([
+            'first_name' => $validations['first_name'],
+            'last_name' => $validations['last_name'],
+            'is_admin' => $validations['is_admin'] ?? false,
+            'email' => $validations['email'],
+            'password' => bcrypt($validations['password']),
+            'avatar' => $validations['avatar'] ?? null,
+            'address' => $validations['address'] ?? null,
+            'phone_number' => $validations['phone_number' ?? null],
+            'is_marketing' => $validations['is_marketing'] ?? false,
+        ]);
+
+        return response($user, 201);
     }
 
     /**
@@ -29,7 +54,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+
+        return response($user, 200);
     }
 
     /**
@@ -37,7 +64,17 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+
+        $validations = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:users,email,' . $user->id,
+        ]);
+
+        $user->update($validations);
+
+        return response($user, 200);
     }
 
     /**
