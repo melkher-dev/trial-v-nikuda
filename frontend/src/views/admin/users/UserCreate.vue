@@ -8,24 +8,44 @@
                     class="input input-bordered input-primary w-full input-sm"
                     v-model="form.first_name"
                 />
+                <div v-if="errors.first_name" class="flex">
+                    <span class="text-red-400 text-sm m-2 p-2">
+                        {{ errors.first_name[0] }}
+                    </span>
+                </div>
                 <input
                     type="text"
                     placeholder="Last Name"
                     class="input input-bordered input-primary w-full input-sm"
                     v-model="form.last_name"
                 />
+                <div v-if="errors.last_name" class="flex">
+                    <span class="text-red-400 text-sm m-2 p-2">
+                        {{ errors.last_name[0] }}
+                    </span>
+                </div>
                 <input
                     type="text"
                     placeholder="Email"
                     class="input input-bordered input-primary w-full input-sm"
                     v-model="form.email"
                 />
+                <div v-if="errors.email" class="flex">
+                    <span class="text-red-400 text-sm m-2 p-2">
+                        {{ errors.email[0] }}
+                    </span>
+                </div>
                 <input
                     type="password"
                     placeholder="Password"
                     class="input input-bordered input-primary w-full input-sm"
                     v-model="form.password"
                 />
+                <div v-if="errors.password" class="flex">
+                    <span class="text-red-400 text-sm m-2 p-2">
+                        {{ errors.password[0] }}
+                    </span>
+                </div>
                 <input
                     type="password"
                     placeholder="Password Confirmation"
@@ -98,6 +118,11 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+let errors = ref([]);
 
 const form = ref({
     first_name: "",
@@ -131,9 +156,22 @@ const uploadAvatar = async (event) => {
 const handleUser = async () => {
     try {
         const response = await axios.post("/api/users", form.value);
-        console.log(response);
+        form.value = {
+            first_name: "",
+            last_name: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
+            address: "",
+            phone_number: "",
+            avatar: "",
+            is_admin: false,
+            is_marketing: false,
+        };
+        router.push("/users");
     } catch (error) {
-        console.error(error);
+        errors.value = error.response.data.errors;
+        console.log(error.response.data.errors);
     }
 };
 </script>
