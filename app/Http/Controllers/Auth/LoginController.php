@@ -23,7 +23,7 @@ class LoginController extends Controller
     {
         $user = auth()->user();
 
-        return $user;
+        return response()->json($user, 200);
     }
 
     public function logout()
