@@ -44,6 +44,7 @@ export const useAuthStore = defineStore('auth', {
             this.user = null
             this.token = null
             Cookies.remove('token')
+            localStorage.removeItem('admin');
         }
     }
 })

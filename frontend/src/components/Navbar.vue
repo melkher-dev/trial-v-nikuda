@@ -36,12 +36,12 @@
 </template>
 
 <script setup>
-// import { useAuthStore } from "../stores/auth";
+import { useAuthStore } from "../stores/auth";
 import { useRouter, RouterLink } from "vue-router";
 
 const admin = JSON.parse(localStorage.getItem('admin'))
 const router = useRouter();
-// const authStore = useAuthStore();
+const authStore = useAuthStore();
 
 const handleLogout = () => {
     authStore.logout();
