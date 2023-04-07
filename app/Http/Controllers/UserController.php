@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -14,39 +16,27 @@ class UserController extends Controller
     {
         $users = User::paginate(10);
 
-        return response()->json($users, 200);
+        return response()->json($users, Response::HTTP_OK);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        $validations = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'is_admin' => 'nullable|boolean',
-            'email' => 'required|string|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-            'avatar' => 'nullable|string|max:255',
-            'address' => 'nullable|string|max:255',
-            'phone_number' => 'nullable|string|max:255',
-            'is_marketing' => 'nullable|boolean',
-        ]);
-
         $user = User::create([
-            'first_name' => $validations['first_name'],
-            'last_name' => $validations['last_name'],
-            'is_admin' => $validations['is_admin'] ?? false,
-            'email' => $validations['email'],
-            'password' => bcrypt($validations['password']),
-            'avatar' => $validations['avatar'] ?? null,
-            'address' => $validations['address'] ?? null,
-            'phone_number' => $validations['phone_number' ?? null],
-            'is_marketing' => $validations['is_marketing'] ?? false,
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'is_admin' => $request->input('is_admin'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'avatar' => $request->input('avatar'),
+            'address' => $request->input('address'),
+            'phone_number' => $request->input('phone_number'),
+            'is_marketing' => $request->input('is_marketing'),
         ]);
 
-        return response($user, 201);
+        return response($user, Response::HTTP_CREATED);
     }
 
     /**
@@ -56,24 +46,32 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
-        return response($user, 200);
+        return response($user, Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
-        $validations = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users,email,' . $id,
-        ]);
 
         $user = User::find($id);
-        $user->update($validations);
 
-        return response($user, 200);
+        $user->update(
+            [
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'is_admin' => $request->input('is_admin'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+                'avatar' => $request->input('avatar'),
+                'address' => $request->input('address'),
+                'phone_number' => $request->input('phone_number'),
+                'is_marketing' => $request->input('is_marketing'),
+            ]
+        );
+
+        return response($user, Response::HTTP_OK);
     }
 
     /**

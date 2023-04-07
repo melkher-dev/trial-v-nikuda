@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,7 @@ class CategoryController extends Controller
     {
         $categories = Category::paginate(10);
 
-        return response()->json($categories, 200);
+        return response()->json($categories, Response::HTTP_OK);
     }
 
     /**
@@ -29,7 +30,7 @@ class CategoryController extends Controller
 
         $category = Category::create($validations);
 
-        return response($category, 201);
+        return response($category, Response::HTTP_CREATED);
     }
 
     /**
@@ -39,7 +40,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-        return response($category, 200);
+        return response($category, Response::HTTP_OK);
     }
 
     /**
@@ -55,7 +56,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category->update($validations);
 
-        return response($category, 200);
+        return response($category, Response::HTTP_OK);
     }
 
     /**

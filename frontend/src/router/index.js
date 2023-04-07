@@ -7,6 +7,7 @@ import Dashboard from '../views/Dashboard.vue'
 import Admin from '../views/admin/Admin.vue'
 import Users from '../views/admin/users/Users.vue'
 import UserCreate from '../views/admin/users/UserCreate.vue'
+import UserUpdate from '../views/admin/users/UserUpdate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +57,15 @@ const router = createRouter({
       path: '/user/create',
       name: 'user-create',
       component: UserCreate,
+      meta: {
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: '/user/update/:id',
+      name: 'user-update',
+      component: UserUpdate,
       meta: {
         requiresAuth: true,
         requiresAdmin: true

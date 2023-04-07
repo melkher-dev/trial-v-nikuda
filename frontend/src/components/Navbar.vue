@@ -39,7 +39,7 @@
 import { useAuthStore } from "../stores/auth";
 import { useRouter, RouterLink } from "vue-router";
 
-const admin = JSON.parse(localStorage.getItem('admin'))
+const admin = JSON.parse(localStorage.getItem("admin"));
 const router = useRouter();
 const authStore = useAuthStore();
 
