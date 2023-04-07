@@ -6,11 +6,12 @@ export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null,
         token: Cookies.get('token'),
+        // admin: false
     }),
 
-    getters: {
-        isAdmin: (state) => state.user && state.user.is_admin
-    },
+    // getters: {
+    //     isAdmin: (state) => state.user && state.user.is_admin
+    // },
 
     actions: {
         async setToken(token, remember) {
@@ -22,6 +23,7 @@ export const useAuthStore = defineStore('auth', {
             try {
                 const { data } = await axios.get('/api/auth')
                 this.user = data;
+                localStorage.setItem('admin', data.is_admin);
             } catch (e) {
                 console.log('e', e)
             }

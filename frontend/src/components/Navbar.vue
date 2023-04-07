@@ -15,7 +15,7 @@
                         >Profile</a
                     >
                 </li>
-                <li v-if="authStore.isAdmin">
+                <li v-if="admin">
                     <router-link
                         to="/admin"
                         class="text-black-300 hover:text-gray-100"
@@ -36,11 +36,12 @@
 </template>
 
 <script setup>
-import { useAuthStore } from "../stores/auth";
+// import { useAuthStore } from "../stores/auth";
 import { useRouter, RouterLink } from "vue-router";
 
+const admin = JSON.parse(localStorage.getItem('admin'))
 const router = useRouter();
-const authStore = useAuthStore();
+// const authStore = useAuthStore();
 
 const handleLogout = () => {
     authStore.logout();

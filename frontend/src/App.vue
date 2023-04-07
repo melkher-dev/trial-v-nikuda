@@ -39,11 +39,19 @@ import { useAuthStore } from "@/stores/auth.js";
 const route = useRoute();
 
 const isGuestRoute = (route) => {
-    return route.path === "/login" || route.path === "/register" || route.path === "/";
+    return (
+        route.path === "/login" ||
+        route.path === "/register" ||
+        route.path === "/"
+    );
 };
 
 const isAdminRoute = (route) => {
-    return route.path === "/admin" || route.path === "/users" || route.path === "/user/create";
+    return (
+        route.path === "/admin" ||
+        route.path === "/users" ||
+        route.path === "/user/create"
+    );
 };
 
 const isUserRoute = (route) => {

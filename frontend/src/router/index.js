@@ -40,7 +40,7 @@ const router = createRouter({
       component: Admin,
       meta: {
         requiresAuth: true,
-        // requiresAdmin: true
+        requiresAdmin: true
       }
     },
     {
@@ -49,7 +49,7 @@ const router = createRouter({
       component: Users,
       meta: {
         requiresAuth: true,
-        // requiresAdmin: true
+        requiresAdmin: true
       }
     },
     {
@@ -58,12 +58,13 @@ const router = createRouter({
       component: UserCreate,
       meta: {
         requiresAuth: true,
-        // requiresAdmin: true
+        requiresAdmin: true
       }
     },
   ]
 })
 
+const admin = JSON.parse(localStorage.getItem('admin'))
 
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
@@ -78,7 +79,7 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
-  if (requiresAdmin && !authStore.isAdmin) {
+  if (requiresAdmin && !admin) {
     next('/dashboard')
   } else {
     next()
