@@ -1,31 +1,10 @@
 <template>
-    <header>
-        <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" /> -->
-
-        <!-- <div class="wrapper">
-            <nav>
-                <RouterLink to="/">Home</RouterLink>
-                <RouterLink to="/login">login</RouterLink>
-            </nav>
-        </div> -->
-    </header>
-    <!-- <div v-if="user"> -->
+    <header></header>
     <div>
-        <GuestLayout v-if="isGuestRoute(route)">
+        <component :is="layoutComponent">
             <RouterView />
-        </GuestLayout>
-        <AdminLayout v-if="isAdminRoute(route)">
-            <RouterView />
-        </AdminLayout>
-        <AuthenticatedLayout v-if="isUserRoute(route)">
-            <RouterView />
-        </AuthenticatedLayout>
+        </component>
     </div>
-
-    <!-- </div> -->
-    <!-- <div v-else> -->
-    <!-- <GuestLayout /> -->
-    <!-- </div> -->
 </template>
 
 <script setup>
@@ -33,32 +12,43 @@ import AuthenticatedLayout from "./layouts/AuthenticatedLayout.vue";
 import AdminLayout from "./layouts/AdminLayout.vue";
 import GuestLayout from "./layouts/GuestLayout.vue";
 import { useRoute, RouterView } from "vue-router";
-import { ref, onMounted } from "vue";
+import { onMounted, computed } from "vue";
 import { useAuthStore } from "@/stores/auth.js";
 
 const route = useRoute();
 
-const isGuestRoute = (route) => {
+const isGuestRoute = () => {
     return (
+        route.path === "/" ||
         route.path === "/login" ||
-        route.path === "/register" ||
-        route.path === "/"
+        route.path === "/register"
     );
 };
 
-const isAdminRoute = (route) => {
+const isAdminRoute = () => {
     return (
         route.path === "/admin" ||
         route.path === "/users" ||
-        route.path === "/user/create"
+        route.path === "/user/create" ||
+        route.path.startsWith("/user/update/")
     );
 };
 
-const isUserRoute = (route) => {
+const isUserRoute = () => {
     return route.path === "/dashboard";
 };
 
-onMounted(async () => {
-    await useAuthStore().fetchUser();
+const layoutComponent = computed(() => {
+    if (isGuestRoute()) {
+        return GuestLayout;
+    } else if (isAdminRoute()) {
+        return AdminLayout;
+    } else if (isUserRoute()) {
+        return AuthenticatedLayout;
+    }
+});
+
+onMounted(() => {
+    useAuthStore().fetchUser();
 });
 </script>

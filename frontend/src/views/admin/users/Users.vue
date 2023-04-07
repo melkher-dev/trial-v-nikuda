@@ -33,9 +33,15 @@
                         <td>{{ user?.address }}</td>
                         <td>{{ user?.phone_number }}</td>
                         <td>
+                            <router-link
+                                :to="`/user/update/${user.id}`"
+                                class="btn btn-outline btn-ghost btn-sm mx-1"
+                            >
+                                Edit
+                            </router-link>
                             <button
                                 @click="deleteUser(user.id)"
-                                class="btn btn-outline btn-error btn-sm"
+                                class="btn btn-outline btn-error btn-sm mx-1"
                             >
                                 Delete
                             </button>
