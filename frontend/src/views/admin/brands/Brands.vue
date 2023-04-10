@@ -6,7 +6,7 @@
         <div v-else class="overflow-x-auto w-full m-2">
             <div class="flex justify-center my-2">
                 <router-link
-                    to="/category/create"
+                    to="/brand/create"
                     class="btn btn-outline btn-primary btn-sm"
                 >
                     Create Brand
