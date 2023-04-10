@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -52,7 +53,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserRequest $request, string $id)
+    public function update(UserUpdateRequest $request, string $id)
     {
 
         $user = User::find($id);
@@ -63,7 +64,6 @@ class UserController extends Controller
                 'last_name' => $request->input('last_name'),
                 'is_admin' => $request->input('is_admin'),
                 'email' => $request->input('email'),
-                'password' => bcrypt($request->input('password')),
                 'avatar' => $request->input('avatar'),
                 'address' => $request->input('address'),
                 'phone_number' => $request->input('phone_number'),

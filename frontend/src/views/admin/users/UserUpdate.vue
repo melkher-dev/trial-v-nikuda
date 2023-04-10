@@ -36,23 +36,6 @@
                     </span>
                 </div>
                 <input
-                    type="password"
-                    placeholder="Password"
-                    class="input input-bordered input-primary w-full input-sm"
-                    v-model="form.password"
-                />
-                <div v-if="errors.password" class="flex">
-                    <span class="text-red-400 text-sm m-2 p-2">
-                        {{ errors.password[0] }}
-                    </span>
-                </div>
-                <input
-                    type="password"
-                    placeholder="Password Confirmation"
-                    class="input input-bordered input-primary w-full input-sm"
-                    v-model="form.password_confirmation"
-                />
-                <input
                     type="text"
                     placeholder="Address"
                     class="input input-bordered input-primary w-full input-sm"
