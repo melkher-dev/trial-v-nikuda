@@ -18,7 +18,7 @@
                 >
             </li>
             <li class="mb-2">
-                <a href="#" class="hover:text-gray-100">www</a>
+                <a href="#" class="hover:text-gray-100">Products</a>
             </li>
         </ul>
     </aside>
