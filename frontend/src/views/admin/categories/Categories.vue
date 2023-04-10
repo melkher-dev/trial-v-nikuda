@@ -9,38 +9,30 @@
                     to="/user/create"
                     class="btn btn-outline btn-primary btn-sm"
                 >
-                    Create User
+                    Create Category
                 </router-link>
             </div>
             <table class="table table-compact w-full">
                 <thead>
                     <tr>
-                        <th>Avatar</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone Number</th>
+                        <th>Title</th>
+                        <th>Slug</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(user, index) in users" :key="index">
-                        <td>{{ user?.avatar }}</td>
-                        <td>{{ user?.first_name }}</td>
-                        <td>{{ user?.last_name }}</td>
-                        <td>{{ user?.email }}</td>
-                        <td>{{ user?.address }}</td>
-                        <td>{{ user?.phone_number }}</td>
+                    <tr v-for="(category, index) in categories" :key="index">
+                        <td>{{ category?.title }}</td>
+                        <td>{{ category?.slug }}</td>
                         <td>
                             <router-link
-                                :to="`/user/update/${user.id}`"
+                                :to="`/category/update/${category.id}`"
                                 class="btn btn-outline btn-ghost btn-sm mx-1"
                             >
                                 Edit
                             </router-link>
                             <button
-                                @click="deleteUser(user.id)"
+                                @click="deleteCategory(category.id)"
                                 class="btn btn-outline btn-error btn-sm mx-1"
                             >
                                 Delete
@@ -76,39 +68,35 @@ import axios from "axios";
 import { RouterLink } from "vue-router";
 
 const isLoading = ref(true);
-const users = ref(null);
+const categories = ref(null);
 const currentPage = ref(1);
 const totalPages = ref(0);
 
-const fetchUsers = async (page) => {
+const fetchCategories = async (page) => {
     isLoading.value = true;
-    const { data } = await axios.get(`/api/users?page=${page}`);
-    users.value = data.data;
+    const { data } = await axios.get(`/api/categories?page=${page}`);
+    categories.value = data.data;
     currentPage.value = data.current_page;
     totalPages.value = data.last_page;
     isLoading.value = false;
 };
 
 onMounted(async () => {
-    await fetchUsers(currentPage.value);
+    await fetchCategories(currentPage.value);
 });
 
 const prev = async () => {
-    if (currentPage.value > 1) {
-        await fetchUsers(currentPage.value - 1);
-    }
+    await fetchCategories(currentPage.value - 1);
 };
 
 const next = async () => {
-    if (currentPage.value < totalPages.value) {
-        await fetchUsers(currentPage.value + 1);
-    }
+    await fetchCategories(currentPage.value + 1);
 };
 
-const deleteUser = async (id) => {
+const deleteCategory = async (id) => {
     if (confirm("Are you sure?")) {
-        await axios.delete(`/api/users/${id}`);
-        await fetchUsers(currentPage.value);
+        await axios.delete(`/api/categories/${id}`);
+        await fetchCategories(currentPage.value);
     }
 };
 </script>

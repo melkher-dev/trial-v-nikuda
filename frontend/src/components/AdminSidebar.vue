@@ -8,7 +8,9 @@
                 >
             </li>
             <li class="mb-2">
-                <a href="#" class="hover:text-gray-100">admin</a>
+                <router-link to="/categories" class="hover:text-gray-100"
+                    >Categories</router-link
+                >
             </li>
             <li class="mb-2">
                 <a href="#" class="hover:text-gray-100">admin</a>
