@@ -102,11 +102,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-actions justify-center">
+                <div v-if="!isDisabled" class="card-actions justify-center">
                     <button
                         @click="handleUser"
                         class="btn btn-outline btn-primary btn-sm"
                     >
+                        Create
+                    </button>
+                </div>
+                <div v-else class="card-actions justify-center">
+                    <button class="btn btn-outline btn-primary btn-sm" disabled>
                         Create
                     </button>
                 </div>
@@ -121,7 +126,7 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
+let isDisabled = ref(false);
 let errors = ref([]);
 
 const form = ref({
@@ -154,8 +159,9 @@ const uploadAvatar = async (event) => {
 };
 
 const handleUser = async () => {
+    isDisabled.value = true;
     try {
-        const response = await axios.post("/api/users", form.value);
+        await axios.post("/api/users", form.value);
         form.value = {
             first_name: "",
             last_name: "",

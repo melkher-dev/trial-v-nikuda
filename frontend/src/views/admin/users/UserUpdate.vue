@@ -110,8 +110,8 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const id = ref(router.currentRoute.value.params.id);
-
 let isDisabled = ref(false);
+const errors = ref([]);
 
 const form = ref({
     first_name: "",
@@ -123,12 +123,11 @@ const form = ref({
     is_marketing: false,
 });
 
-const errors = ref({});
 
 const updateUser = async () => {
     isDisabled.value = true;
     try {
-        const { data } = await axios.put(`/api/users/${id.value}`, form.value);
+        await axios.put(`/api/users/${id.value}`, form.value);
         router.push("/users");
     } catch (error) {
         errors.value = error.response.data.errors;

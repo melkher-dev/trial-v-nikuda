@@ -15,7 +15,7 @@
                 </div>
                 <div v-if="!isDisabled" class="card-actions justify-center">
                     <button
-                        @click="handleCategory"
+                        @click="updateCategory"
                         class="btn btn-outline btn-primary btn-sm"
                     >
                         Create
@@ -32,25 +32,31 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const id = ref(router.currentRoute.value.params.id);
 const isDisabled = ref(false);
-let errors = ref([]);
+const errors = ref([]);
 
 const form = ref({
     title: "",
 });
 
-const handleCategory = async () => {
+const updateCategory = async () => {
     isDisabled.value = true;
     try {
-        await axios.post("/api/categories", form.value);
+        await axios.put(`/api/categories/${id.value}`, form.value);
         router.push("/categories");
     } catch (error) {
         errors.value = error.response.data.errors;
     }
 };
+
+onMounted(async () => {
+    const { data } = await axios.get(`/api/categories/${id.value}`);
+    form.value = data;
+});
 </script>
