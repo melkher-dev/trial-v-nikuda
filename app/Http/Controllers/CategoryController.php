@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
@@ -21,14 +24,12 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $validations = $request->validate([
-            'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories,slug',
+        $category = Category::create([
+            'title' => $request->input('title'),
+            'slug' => Str::slug($request->input('title')),
         ]);
-
-        $category = Category::create($validations);
 
         return response($category, Response::HTTP_CREATED);
     }
@@ -46,15 +47,14 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CategoryUpdateRequest $request, string $id)
     {
-        $validations = $request->validate([
-            'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories,slug,' . $id,
-        ]);
-
         $category = Category::find($id);
-        $category->update($validations);
+
+        $category->update([
+            'title' => $request->input('title'),
+            'slug' => Str::slug($request->input('title')),
+        ]);
 
         return response($category, Response::HTTP_OK);
     }
