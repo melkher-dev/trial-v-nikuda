@@ -1,31 +1,31 @@
 <template>
-    <header class="bg-green-400 px-4 py-3 flex justify-between items-center">
-        <div class="text-black-300 font-semibold text-lg">
+    <header class="bg-cyan-800 px-4 py-3 flex justify-between items-center">
+        <div class="text-gray-300 font-semibold text-lg">
             Authenticated Navbar
         </div>
         <nav>
             <ul class="flex space-x-4">
                 <li>
-                    <a href="#" class="text-black-300 hover:text-gray-100"
+                    <a href="#" class="text-gray-300 hover:text-gray-100"
                         >Dashboard</a
                     >
                 </li>
                 <li>
-                    <a href="#" class="text-black-300 hover:text-gray-100"
+                    <a href="#" class="text-gray-300 hover:text-gray-100"
                         >Profile</a
                     >
                 </li>
                 <li v-if="admin">
                     <router-link
                         to="/admin"
-                        class="text-black-300 hover:text-gray-100"
+                        class="text-gray-300 hover:text-gray-100"
                         >Admin Page</router-link
                     >
                 </li>
                 <li>
                     <button
                         @click="handleLogout"
-                        class="text-black-300 hover:text-gray-100"
+                        class="text-gray-300 hover:text-gray-100"
                     >
                         Logout
                     </button>
@@ -43,8 +43,8 @@ const admin = JSON.parse(localStorage.getItem("admin"));
 const router = useRouter();
 const authStore = useAuthStore();
 
-const handleLogout = () => {
+const handleLogout = async () => {
     authStore.logout();
-    router.push("/login");
+    await router.push("/login");
 };
 </script>

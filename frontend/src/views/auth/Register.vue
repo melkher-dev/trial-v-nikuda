@@ -72,7 +72,7 @@ const handleRegister = async () => {
     isDisabled.value = true;
     try {
         await useAuthStore().register(form.value);
-        router.push("/");
+        await router.push("/");
     } catch (error) {
         console.log(error);
     }

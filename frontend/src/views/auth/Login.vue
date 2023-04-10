@@ -67,6 +67,6 @@ const form = ref({
 const handleLogin = async () => {
     isDisabled.value = true;
     await useAuthStore().login(form.value);
-    router.push("/dashboard");
+    await router.push("/dashboard");
 };
 </script>

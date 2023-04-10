@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import AuthenticatedLayout from "../layouts/AuthenticatedLayout.vue";
+import AdminLayout from "../layouts/AdminLayout.vue";
+import GuestLayout from "../layouts/GuestLayout.vue";
 import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 import Register from '../views/auth/Register.vue'
@@ -15,23 +18,33 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        layout: GuestLayout
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: {
+        layout: GuestLayout
+      }
     },
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: Register,
+      meta: {
+        layout: GuestLayout
+      }
     },
     {
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard,
       meta: {
+        layout: AuthenticatedLayout,
         requiresAuth: true
       }
     },
@@ -40,6 +53,7 @@ const router = createRouter({
       name: 'admin',
       component: Admin,
       meta: {
+        layout: AdminLayout,
         requiresAuth: true,
         requiresAdmin: true
       }
@@ -49,6 +63,7 @@ const router = createRouter({
       name: 'users',
       component: Users,
       meta: {
+        layout: AdminLayout,
         requiresAuth: true,
         requiresAdmin: true
       }
@@ -58,6 +73,7 @@ const router = createRouter({
       name: 'user-create',
       component: UserCreate,
       meta: {
+        layout: AdminLayout,
         requiresAuth: true,
         requiresAdmin: true
       }
@@ -67,6 +83,7 @@ const router = createRouter({
       name: 'user-update',
       component: UserUpdate,
       meta: {
+        layout: AdminLayout,
         requiresAuth: true,
         requiresAdmin: true
       }
