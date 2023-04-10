@@ -4,7 +4,7 @@
             <div class="card-body">
                 <input
                     type="text"
-                    placeholder="Category Title"
+                    placeholder="Brand Title"
                     class="input input-bordered input-primary w-full input-sm"
                     v-model="form.title"
                 />
@@ -15,7 +15,7 @@
                 </div>
                 <div v-if="!isDisabled" class="card-actions justify-center">
                     <button
-                        @click="updateCategory"
+                        @click="updateBrand"
                         class="btn btn-outline btn-primary btn-sm"
                     >
                         Update
@@ -45,18 +45,18 @@ const form = ref({
     title: "",
 });
 
-const updateCategory = async () => {
+const updateBrand = async () => {
     isDisabled.value = true;
     try {
-        await axios.put(`/api/categories/${id.value}`, form.value);
-        router.push("/categories");
+        await axios.put(`/api/brands/${id.value}`, form.value);
+        router.push("/brands");
     } catch (error) {
         errors.value = error.response.data.errors;
     }
 };
 
 onMounted(async () => {
-    const { data } = await axios.get(`/api/categories/${id.value}`);
+    const { data } = await axios.get(`/api/brands/${id.value}`);
     form.value = data;
 });
 </script>

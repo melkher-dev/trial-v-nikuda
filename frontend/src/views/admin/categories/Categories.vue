@@ -3,7 +3,7 @@
         <div v-if="isLoading">
             <progress class="progress w-56"></progress>
         </div>
-        <div v-else class="overflow-x-auto w-full m-2">
+        <div v-else class="overflow-x-auto w-full m-5">
             <div class="flex justify-center my-2">
                 <router-link
                     to="/category/create"

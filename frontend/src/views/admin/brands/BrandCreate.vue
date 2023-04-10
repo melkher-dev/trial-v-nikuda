@@ -1,10 +1,10 @@
 <template>
-    <div class="flex justify-center m-2">
+    <div class="flex justify-center m-5">
         <div class="card w-2/3 bg-base-100 shadow-xl">
             <div class="card-body">
                 <input
                     type="text"
-                    placeholder="Category Title"
+                    placeholder="Brand Title"
                     class="input input-bordered input-primary w-full input-sm"
                     v-model="form.title"
                 />

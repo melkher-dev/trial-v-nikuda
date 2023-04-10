@@ -16,6 +16,7 @@ import CategoryCreate from '../views/admin/categories/CategoryCreate.vue'
 import CategoryUpdate from '../views/admin/categories/CategoryUpdate.vue'
 import Brands from '../views/admin/brands/Brands.vue'
 import BrandCreate from '../views/admin/brands/BrandCreate.vue'
+import BrandUpdate from '../views/admin/brands/BrandUpdate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -137,6 +138,16 @@ const router = createRouter({
       path: '/brand/create',
       name: 'brand-create',
       component: BrandCreate,
+      meta: {
+        layout: AdminLayout,
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: '/brand/update/:id',
+      name: 'brand-update',
+      component: BrandUpdate,
       meta: {
         layout: AdminLayout,
         requiresAuth: true,
