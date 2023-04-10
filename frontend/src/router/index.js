@@ -14,6 +14,7 @@ import UserUpdate from '../views/admin/users/UserUpdate.vue'
 import Categories from '../views/admin/categories/Categories.vue'
 import CategoryCreate from '../views/admin/categories/CategoryCreate.vue'
 import CategoryUpdate from '../views/admin/categories/CategoryUpdate.vue'
+import Brands from '../views/admin/brands/Brands.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -115,6 +116,16 @@ const router = createRouter({
       path: '/category/update/:id',
       name: 'category-update',
       component: CategoryUpdate,
+      meta: {
+        layout: AdminLayout,
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: '/brands',
+      name: 'brands',
+      component: Brands,
       meta: {
         layout: AdminLayout,
         requiresAuth: true,

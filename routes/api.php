@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
@@ -43,5 +44,7 @@ Route::group(
         Route::apiResource('categories', CategoryController::class);
 
         Route::post('upload', [AvatarController::class, 'upload']);
+
+        Route::apiResource('brands', BrandController::class);
     }
 );

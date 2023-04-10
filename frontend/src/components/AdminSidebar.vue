@@ -13,10 +13,12 @@
                 >
             </li>
             <li class="mb-2">
-                <a href="#" class="hover:text-gray-100">admin</a>
+                <router-link to="/brands" class="hover:text-gray-100"
+                    >Brands</router-link
+                >
             </li>
             <li class="mb-2">
-                <a href="#" class="hover:text-gray-100">Logout</a>
+                <a href="#" class="hover:text-gray-100">www</a>
             </li>
         </ul>
     </aside>
