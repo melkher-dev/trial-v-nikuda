@@ -6,12 +6,9 @@ export const useAuthStore = defineStore('auth', {
     state: () => ({
         user: null,
         token: Cookies.get('token'),
-        // admin: false
+        fetched: false,
+        admin: null
     }),
-
-    // getters: {
-    //     isAdmin: (state) => state.user && state.user.is_admin
-    // },
 
     actions: {
         async setToken(token, remember) {
@@ -20,10 +17,15 @@ export const useAuthStore = defineStore('auth', {
         },
 
         async fetchUser() {
+            if (this.fetched) {
+                return;
+            }
+
             try {
                 const { data } = await axios.get('/api/auth')
                 this.user = data;
-                localStorage.setItem('admin', data.is_admin);
+                this.admin = data.is_admin;
+                this.fetched = true;
             } catch (e) {
                 console.log('e', e)
             }
@@ -44,7 +46,6 @@ export const useAuthStore = defineStore('auth', {
             this.user = null
             this.token = null
             Cookies.remove('token')
-            localStorage.removeItem('admin');
         }
     }
 })

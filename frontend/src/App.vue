@@ -20,6 +20,9 @@ const layout = computed(() => {
 });
 
 onMounted(() => {
-    useAuthStore().fetchUser();
+    const authStore = useAuthStore();
+    if (!authStore.fetched) {
+        authStore.fetchUser();
+    }
 });
 </script>

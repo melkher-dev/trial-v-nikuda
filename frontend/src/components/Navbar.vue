@@ -15,7 +15,7 @@
                         >Profile</a
                     >
                 </li>
-                <li v-if="admin">
+                <li v-if="authStore.admin">
                     <router-link
                         to="/admin"
                         class="text-gray-300 hover:text-gray-100"
@@ -39,7 +39,6 @@
 import { useAuthStore } from "../stores/auth";
 import { useRouter, RouterLink } from "vue-router";
 
-const admin = JSON.parse(localStorage.getItem("admin"));
 const router = useRouter();
 const authStore = useAuthStore();
 

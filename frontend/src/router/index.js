@@ -19,9 +19,9 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
-      meta: {
-        layout: GuestLayout
-      }
+      // meta: {
+      //   layout: GuestLayout
+      // }
     },
     {
       path: '/login',
@@ -91,8 +91,6 @@ const router = createRouter({
   ]
 })
 
-const admin = JSON.parse(localStorage.getItem('admin'))
-
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
@@ -106,7 +104,7 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
   const authStore = useAuthStore()
   const requiresAdmin = to.matched.some(record => record.meta.requiresAdmin)
-  if (requiresAdmin && !admin) {
+  if (requiresAdmin && !authStore.admin) {
     next('/dashboard')
   } else {
     next()
