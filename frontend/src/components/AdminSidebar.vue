@@ -18,7 +18,7 @@
                 >
             </li>
             <li class="mb-2">
-                <a href="#" class="hover:text-gray-100">Products</a>
+                <router-link to="/products" class="hover:text-gray-100">Products</router-link>
             </li>
         </ul>
     </aside>

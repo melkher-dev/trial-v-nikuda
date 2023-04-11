@@ -26,7 +26,7 @@ class ProductUpdateRequest extends FormRequest
             'title' => 'string|max:255',
             'price' => 'numeric',
             'description' => 'string|max:1000',
-            'metadata' => 'array',
+            'metadata' => 'nullable|array',
         ];
     }
 }
