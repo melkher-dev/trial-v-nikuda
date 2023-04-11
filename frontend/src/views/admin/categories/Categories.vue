@@ -24,7 +24,7 @@
                     <tr v-for="(category, index) in categories" :key="index">
                         <td>{{ category?.title }}</td>
                         <td>{{ category?.slug }}</td>
-                        <td>
+                        <td class="flex justify-end">
                             <router-link
                                 :to="`/category/update/${category.id}`"
                                 class="btn btn-outline btn-ghost btn-sm mx-1"
@@ -41,85 +41,17 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="flex justify-center">
-                <button
-                    @click="prev"
-                    :disabled="currentPage === 1"
-                    v-if="currentPage > 1"
-                    class="btn btn-outline btn-ghost btn-sm mx-2"
-                >
-                    Prev
-                </button>
-                <template v-if="totalPages <= 7">
-                    <button
-                        v-for="n in totalPages"
-                        :key="n"
-                        @click="fetchCategories(n)"
-                        :class="[
-                            'btn',
-                            n === currentPage ? 'btn-primary' : 'btn-outline',
-                            'btn-ghost',
-                            'btn-sm',
-                            'mx-1',
-                        ]"
-                    >
-                        {{ n }}
-                    </button>
-                </template>
-                <template v-else>
-                    <button
-                        v-if="currentPage > 4"
-                        @click="fetchCategories(1)"
-                        class="btn btn-outline btn-ghost btn-sm mx-1"
-                    >
-                        1
-                    </button>
-                    <template v-if="currentPage > 5">
-                        <span class="mx-1">&hellip;</span>
-                    </template>
-                    <button
-                        v-for="n in [
-                            currentPage - 1,
-                            currentPage,
-                            currentPage + 1,
-                        ]"
-                        :key="n"
-                        @click="fetchCategories(n)"
-                        :class="[
-                            'btn',
-                            n === currentPage ? 'btn-primary' : 'btn-outline',
-                            'btn-ghost',
-                            'btn-sm',
-                            'mx-1',
-                        ]"
-                    >
-                        {{ n }}
-                    </button>
-                    <template v-if="currentPage < totalPages - 4">
-                        <span class="mx-1">&hellip;</span>
-                    </template>
-                    <button
-                        v-if="currentPage < totalPages - 3"
-                        @click="fetchCategories(totalPages)"
-                        class="btn btn-outline btn-ghost btn-sm mx-1"
-                    >
-                        {{ totalPages }}
-                    </button>
-                </template>
-                <button
-                    @click="next"
-                    :disabled="currentPage === totalPages"
-                    v-if="currentPage < totalPages"
-                    class="btn btn-outline btn-ghost btn-sm mx-2"
-                >
-                    Next
-                </button>
-            </div>
+            <Pagination
+                :currentPage="currentPage"
+                :totalPages="totalPages"
+                @fetch="(n) => fetch(n)"
+            />
         </div>
     </div>
 </template>
 
 <script setup>
+import Pagination from "@/components/Pagination.vue";
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { RouterLink } from "vue-router";
@@ -129,7 +61,7 @@ const categories = ref(null);
 const currentPage = ref(1);
 const totalPages = ref(0);
 
-const fetchCategories = async (page) => {
+const fetch = async (page) => {
     isLoading.value = true;
     const { data } = await axios.get(`/api/categories?page=${page}`);
     categories.value = data.data;
@@ -139,21 +71,13 @@ const fetchCategories = async (page) => {
 };
 
 onMounted(async () => {
-    await fetchCategories(currentPage.value);
+    await fetch(currentPage.value);
 });
-
-const prev = async () => {
-    await fetchCategories(currentPage.value - 1);
-};
-
-const next = async () => {
-    await fetchCategories(currentPage.value + 1);
-};
 
 const deleteCategory = async (id) => {
     if (confirm("Are you sure?")) {
         await axios.delete(`/api/categories/${id}`);
-        await fetchCategories(currentPage.value);
+        await fetch(currentPage.value);
     }
 };
 </script>

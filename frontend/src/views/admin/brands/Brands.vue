@@ -24,7 +24,7 @@
                     <tr v-for="(brand, index) in brands" :key="index">
                         <td>{{ brand?.title }}</td>
                         <td>{{ brand?.slug }}</td>
-                        <td>
+                        <td class="flex justify-end">
                             <router-link
                                 :to="`/brand/update/${brand.id}`"
                                 class="btn btn-outline btn-ghost btn-sm mx-1"
@@ -41,85 +41,17 @@
                     </tr>
                 </tbody>
             </table>
-            <div class="flex justify-center">
-                <button
-                    @click="prev"
-                    :disabled="currentPage === 1"
-                    v-if="currentPage > 1"
-                    class="btn btn-outline btn-ghost btn-sm mx-2"
-                >
-                    Prev
-                </button>
-                <template v-if="totalPages <= 7">
-                    <button
-                        v-for="n in totalPages"
-                        :key="n"
-                        @click="fetchBrands(n)"
-                        :class="[
-                            'btn',
-                            n === currentPage ? 'btn-primary' : 'btn-outline',
-                            'btn-ghost',
-                            'btn-sm',
-                            'mx-1',
-                        ]"
-                    >
-                        {{ n }}
-                    </button>
-                </template>
-                <template v-else>
-                    <button
-                        v-if="currentPage > 4"
-                        @click="fetchBrands(1)"
-                        class="btn btn-outline btn-ghost btn-sm mx-1"
-                    >
-                        1
-                    </button>
-                    <template v-if="currentPage > 5">
-                        <span class="mx-1">&hellip;</span>
-                    </template>
-                    <button
-                        v-for="n in [
-                            currentPage - 1,
-                            currentPage,
-                            currentPage + 1,
-                        ]"
-                        :key="n"
-                        @click="fetchBrands(n)"
-                        :class="[
-                            'btn',
-                            n === currentPage ? 'btn-primary' : 'btn-outline',
-                            'btn-ghost',
-                            'btn-sm',
-                            'mx-1',
-                        ]"
-                    >
-                        {{ n }}
-                    </button>
-                    <template v-if="currentPage < totalPages - 4">
-                        <span class="mx-1">&hellip;</span>
-                    </template>
-                    <button
-                        v-if="currentPage < totalPages - 3"
-                        @click="fetchBrands(totalPages)"
-                        class="btn btn-outline btn-ghost btn-sm mx-1"
-                    >
-                        {{ totalPages }}
-                    </button>
-                </template>
-                <button
-                    @click="next"
-                    :disabled="currentPage === totalPages"
-                    v-if="currentPage < totalPages"
-                    class="btn btn-outline btn-ghost btn-sm mx-2"
-                >
-                    Next
-                </button>
-            </div>
+            <Pagination
+                :current-page="currentPage"
+                :total-pages="totalPages"
+                @fetch="(n) => fetch(n)"
+            />
         </div>
     </div>
 </template>
 
 <script setup>
+import Pagination from "@/components/Pagination.vue";
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { RouterLink } from "vue-router";
@@ -129,7 +61,7 @@ const brands = ref(null);
 const currentPage = ref(1);
 const totalPages = ref(0);
 
-const fetchBrands = async (page) => {
+const fetch = async (page) => {
     isLoading.value = true;
     const { data } = await axios.get(`/api/brands?page=${page}`);
     brands.value = data.data;
@@ -139,21 +71,13 @@ const fetchBrands = async (page) => {
 };
 
 onMounted(async () => {
-    await fetchBrands(currentPage.value);
+    await fetch(currentPage.value);
 });
-
-const prev = async () => {
-    await fetchBrands(currentPage.value - 1);
-};
-
-const next = async () => {
-    await fetchBrands(currentPage.value + 1);
-};
 
 const deleteBrand = async (id) => {
     if (confirm("Are you sure?")) {
         await axios.delete(`/api/brands/${id}`);
-        await fetchBrands(currentPage.value);
+        await fetch(currentPage.value);
     }
 };
 </script>
