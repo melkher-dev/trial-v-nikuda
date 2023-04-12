@@ -19,6 +19,7 @@ import BrandCreate from '../views/admin/brands/BrandCreate.vue'
 import BrandUpdate from '../views/admin/brands/BrandUpdate.vue'
 import Products from '../views/admin/products/Products.vue'
 import ProductCreate from '../views/admin/products/ProductCreate.vue'
+import ProductUpdate from '../views/admin/products/ProductUpdate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -170,6 +171,16 @@ const router = createRouter({
       path: '/product/create',
       name: 'product-create',
       component: ProductCreate,
+      meta: {
+        layout: AdminLayout,
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: '/product/update/:id',
+      name: 'product-update',
+      component: ProductUpdate,
       meta: {
         layout: AdminLayout,
         requiresAuth: true,
