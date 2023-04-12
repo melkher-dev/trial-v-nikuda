@@ -20,6 +20,7 @@ import BrandUpdate from '../views/admin/brands/BrandUpdate.vue'
 import Products from '../views/admin/products/Products.vue'
 import ProductCreate from '../views/admin/products/ProductCreate.vue'
 import ProductUpdate from '../views/admin/products/ProductUpdate.vue'
+import OrderStatuses from '../views/admin/order-statuses/OrderStatuses.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -181,6 +182,16 @@ const router = createRouter({
       path: '/product/update/:id',
       name: 'product-update',
       component: ProductUpdate,
+      meta: {
+        layout: AdminLayout,
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: '/order-statuses',
+      name: 'order-statuses',
+      component: OrderStatuses,
       meta: {
         layout: AdminLayout,
         requiresAuth: true,
