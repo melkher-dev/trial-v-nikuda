@@ -20,6 +20,9 @@
             <li class="mb-2">
                 <router-link to="/products" class="hover:text-gray-100">Products</router-link>
             </li>
+            <li class="mb-2">
+                <router-link to="/order-statuses" class="hover:text-gray-100">Order Statuses</router-link>
+            </li>
         </ul>
     </aside>
 </template>

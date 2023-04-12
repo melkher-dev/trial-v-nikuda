@@ -8,6 +8,7 @@ use App\Http\Controllers\AvatarController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\OrderStatusController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -51,5 +52,7 @@ Route::group(
         Route::apiResource('brands', BrandController::class);
 
         Route::apiResource('products', ProductController::class);
+
+        Route::apiResource('order/statuses', OrderStatusController::class);
     }
 );

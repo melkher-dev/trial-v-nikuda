@@ -3,7 +3,7 @@
         <div class="text-gray-300 font-semibold text-lg">Admin Navbar</div>
         <nav>
             <ul class="flex space-x-4">
-                <li>
+                <!-- <li>
                     <a href="#" class="text-gray-300 hover:text-gray-100"
                         >admin</a
                     >
@@ -12,7 +12,7 @@
                     <a href="#" class="text-gray-300 hover:text-gray-100"
                         >admin</a
                     >
-                </li>
+                </li> -->
                 <li>
                     <router-link
                         to="/dashboard"
