@@ -70,4 +70,14 @@ class BrandController extends Controller
             'message' => 'Brand deleted successfully',
         ]);
     }
+
+    /**
+     * Get all brands.
+     */
+    public function getAllBrands()
+    {
+        $brands = Brand::all();
+
+        return response()->json($brands, Response::HTTP_OK);
+    }
 }

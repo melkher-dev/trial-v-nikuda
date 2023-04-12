@@ -40,9 +40,11 @@ Route::group(
         Route::post('refresh', [LoginController::class, 'refresh']);
         Route::get('auth', [LoginController::class, 'auth']);
 
-        // Route::get('users', [UserController::class], 'index');
         Route::apiResource('users', UserController::class);
         Route::apiResource('categories', CategoryController::class);
+
+        Route::get('all-categories', [CategoryController::class, 'getAllCategories']);
+        Route::get('all-brands', [BrandController::class, 'getAllBrands']);
 
         Route::post('upload', [AvatarController::class, 'upload']);
 

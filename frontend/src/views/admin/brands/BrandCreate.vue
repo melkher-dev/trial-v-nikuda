@@ -38,7 +38,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const isDisabled = ref(false);
-let errors = ref([]);
+const errors = ref([]);
 
 const form = ref({
     title: "",

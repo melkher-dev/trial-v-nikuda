@@ -70,4 +70,14 @@ class CategoryController extends Controller
             'message' => 'Category deleted successfully',
         ]);
     }
+
+    /**
+     * Get all categories.
+     */
+    public function getAllCategories()
+    {
+        $categories = Category::all();
+
+        return response()->json($categories, Response::HTTP_OK);
+    }
 }

@@ -126,8 +126,8 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-let isDisabled = ref(false);
-let errors = ref([]);
+const isDisabled = ref(false);
+const errors = ref([]);
 
 const form = ref({
     first_name: "",

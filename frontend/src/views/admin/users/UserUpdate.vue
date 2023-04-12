@@ -110,7 +110,7 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const id = ref(router.currentRoute.value.params.id);
-let isDisabled = ref(false);
+const isDisabled = ref(false);
 const errors = ref([]);
 
 const form = ref({
