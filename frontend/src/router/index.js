@@ -22,6 +22,7 @@ import ProductCreate from '../views/admin/products/ProductCreate.vue'
 import ProductUpdate from '../views/admin/products/ProductUpdate.vue'
 import OrderStatuses from '../views/admin/order-statuses/OrderStatuses.vue'
 import OrderStatusCreate from '../views/admin/order-statuses/OrderStatusCreate.vue'
+import OrderStatusUpdate from '../views/admin/order-statuses/OrderStatusUpdate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -203,6 +204,16 @@ const router = createRouter({
       path: '/order-status/create',
       name: 'order-status-create',
       component: OrderStatusCreate,
+      meta: {
+        layout: AdminLayout,
+        requiresAuth: true,
+        requiresAdmin: true
+      }
+    },
+    {
+      path: '/order-status/update/:id',
+      name: 'order-status-update',
+      component: OrderStatusUpdate,
       meta: {
         layout: AdminLayout,
         requiresAuth: true,
