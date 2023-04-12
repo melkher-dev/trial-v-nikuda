@@ -8,24 +8,44 @@
                     placeholder="First Name"
                     class="input input-bordered input-primary w-full max-w-xs"
                 />
+                <div v-if="errors.first_name" class="flex">
+                    <span class="text-red-400 text-sm m-2 p-2">
+                        {{ errors.first_name[0] }}
+                    </span>
+                </div>
                 <input
                     v-model="form.last_name"
                     type="text"
                     placeholder="Last Name"
                     class="input input-bordered input-primary w-full max-w-xs"
                 />
+                <div v-if="errors.last_name" class="flex">
+                    <span class="text-red-400 text-sm m-2 p-2">
+                        {{ errors.last_name[0] }}
+                    </span>
+                </div>
                 <input
                     v-model="form.email"
                     type="email"
                     placeholder="Email"
                     class="input input-bordered input-primary w-full max-w-xs"
                 />
+                <div v-if="errors.email" class="flex">
+                    <span class="text-red-400 text-sm m-2 p-2">
+                        {{ errors.email[0] }}
+                    </span>
+                </div>
                 <input
                     v-model="form.password"
                     type="password"
                     placeholder="Password"
                     class="input input-bordered input-primary w-full max-w-xs"
                 />
+                <div v-if="errors.password" class="flex">
+                    <span class="text-red-400 text-sm m-2 p-2">
+                        {{ errors.password[0] }}
+                    </span>
+                </div>
                 <input
                     v-model="form.password_confirmation"
                     type="password"
@@ -57,8 +77,8 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth.js";
 
 const router = useRouter();
-
-let isDisabled = ref(false);
+const errors = ref([]);
+const isDisabled = ref(false);
 
 const form = ref({
     first_name: "",
@@ -74,7 +94,10 @@ const handleRegister = async () => {
         await useAuthStore().register(form.value);
         await router.push("/");
     } catch (error) {
-        console.log(error);
+        errors.value = error.response.data.errors;
+        console.log('error', error.response.data.errors)
+    } finally {
+        isDisabled.value = false;
     }
 };
 </script>
