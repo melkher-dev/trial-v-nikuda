@@ -6,7 +6,7 @@
         <div v-else class="overflow-x-auto w-full m-5">
             <div class="flex justify-center my-2">
                 <router-link
-                    to="/brand/create"
+                    to="/order-status/create"
                     class="btn btn-outline btn-primary btn-sm"
                 >
                     Create Order Status
