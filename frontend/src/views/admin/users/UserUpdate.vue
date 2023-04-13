@@ -123,6 +123,21 @@ const form = ref({
     is_marketing: false,
 });
 
+const uploadAvatar = async (event) => {
+    const formData = new FormData();
+    formData.append("avatar", event.target.files[0]);
+
+    try {
+        const response = await axios.post("/api/upload", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+        });
+        form.value.avatar = response.data.avatar;
+    } catch (error) {
+        console.error(error);
+    }
+};
 
 const updateUser = async () => {
     isDisabled.value = true;

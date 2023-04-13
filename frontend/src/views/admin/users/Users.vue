@@ -26,7 +26,18 @@
                 </thead>
                 <tbody>
                     <tr v-for="(user, index) in users" :key="index">
-                        <td>{{ user?.avatar }}</td>
+                        <td>
+                            <div v-if="user.avatar" class="avatar">
+                                <div class="w-12 rounded">
+                                    <img
+                                    :src="'http://localhost/storage/' + user.avatar"
+                                    />
+                                </div>
+                            </div>
+                            <div v-else class="avatar">
+                                <p>no image</p>
+                            </div>
+                        </td>
                         <td>{{ user?.first_name }}</td>
                         <td>{{ user?.last_name }}</td>
                         <td>{{ user?.email }}</td>
