@@ -23,6 +23,9 @@
             <li class="mb-2">
                 <router-link to="/order-statuses" class="hover:text-gray-100">Order Statuses</router-link>
             </li>
+            <li class="mb-2">
+                <router-link to="/payments" class="hover:text-gray-100">Payments</router-link>
+            </li>
         </ul>
     </aside>
 </template>

@@ -31,7 +31,7 @@ class BrandController extends Controller
             'slug' => Str::slug($request->input('title')),
         ]);
 
-        return response($brand, Response::HTTP_CREATED);
+        return response()->json($brand, Response::HTTP_CREATED);
     }
 
     /**
@@ -41,7 +41,7 @@ class BrandController extends Controller
     {
         $brand = Brand::find($id);
 
-        return response($brand, Response::HTTP_OK);
+        return response()->json($brand, Response::HTTP_OK);
     }
 
     /**
@@ -56,7 +56,7 @@ class BrandController extends Controller
             'slug' => Str::slug($request->input('title')),
         ]);
 
-        return response($brand, Response::HTTP_OK);
+        return response()->json($brand, Response::HTTP_OK);
     }
 
     /**

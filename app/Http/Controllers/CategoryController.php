@@ -31,7 +31,7 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->input('title')),
         ]);
 
-        return response($category, Response::HTTP_CREATED);
+        return response()->json($category, Response::HTTP_CREATED);
     }
 
     /**
@@ -41,7 +41,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-        return response($category, Response::HTTP_OK);
+        return response()->json($category, Response::HTTP_OK);
     }
 
     /**
@@ -56,7 +56,7 @@ class CategoryController extends Controller
             'slug' => Str::slug($request->input('title')),
         ]);
 
-        return response($category, Response::HTTP_OK);
+        return response()->json($category, Response::HTTP_OK);
     }
 
     /**

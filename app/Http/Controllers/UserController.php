@@ -37,7 +37,7 @@ class UserController extends Controller
             'is_marketing' => $request->input('is_marketing'),
         ]);
 
-        return response($user, Response::HTTP_CREATED);
+        return response()->json($user, Response::HTTP_CREATED);
     }
 
     /**
@@ -71,7 +71,7 @@ class UserController extends Controller
             ]
         );
 
-        return response($user, Response::HTTP_OK);
+        return response()->json($user, Response::HTTP_OK);
     }
 
     /**
